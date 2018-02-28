@@ -6,7 +6,7 @@
 /*   By: ggenois <ggenois@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/27 14:57:11 by ggenois      #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/28 21:56:54 by ggenois     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/28 23:38:56 by ggenois     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,18 +31,23 @@ char	*ft_readfile_once(int fd)
 	int		i;
 	char	cbuffer[BUFF_SIZE];
 	char	*str;
+	int		eof;
 
+	eof = 0;
 	str = ft_strnew(1);
 	if (BUFF_SIZE < 1 || str == NULL)
 		return (0);
 	while ((i = read(fd, cbuffer, BUFF_SIZE)) > 0)
 	{
+		eof = 1;
 		if ((str = ft_strnew(i + 1)) == NULL)
 			return (0);
 		str = ft_strncpy(str, cbuffer, i);
 		break ;
 	}
-	return (str);
+	if (i < 0)
+		return (NULL);
+	return (eof ? str : ft_strnew(1));
 }
 
 char	*ft_strjoin_patched(char *s1, char *s2)
@@ -71,23 +76,28 @@ int		get_next_line(const int fd, char **line)
 	char			*tmp;
 	int				i;
 
+	if (fd < 0)
+		return (-1);
 	while (1)
 	{
-		if ((i = ft_finditem(g_b, '\n')) >= 0)
+		while ((i = ft_finditem(g_b, '\n')) < 0)
 		{
-			(*line) = (i ? ft_strdup(ft_strsplit(g_b, '\n')[0]) : ft_strnew(1));
-			g_b = ft_strsub(g_b, i + 1, (ft_strlen(g_b) - i - 1));
-			return (1);
+			if ((tmp = ft_readfile_once(fd)) == NULL)
+			{
+				return (-1);
+			}
+			if(ft_strlen(tmp) != 0)
+				if (g_b == NULL || ft_strlen(g_b) == 0)
+					return (0);
+				(*line) = g_b;
+				g_b = NULL;
+				return (1);
+			}
+			g_b = ft_strjoin_patched(g_b, tmp);
 		}
-		if ((tmp = ft_readfile_once(fd)) == 0)
-			return (-1);
-		if (tmp[0] == '\0')
-		{
-			(*line) = g_b;
-			return (0);
-		}
-		g_b = ft_strjoin_patched(g_b, tmp);
-		free(tmp);
+		(*line) = (i ? ft_strdup(ft_strsplit(g_b, '\n')[0]) : ft_strnew(1));
+		g_b = ft_strsub(g_b, i + 1, (ft_strlen(g_b) - i - 1));
+		return (1);
 	}
 	my_malloc_cleanup();
 	return (0);
