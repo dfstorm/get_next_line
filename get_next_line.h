@@ -6,7 +6,7 @@
 /*   By: ggenois <ggenois@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/26 13:44:14 by ggenois      #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/27 15:57:43 by ggenois     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/02/28 19:07:21 by ggenois     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,6 +21,6 @@ typedef	struct	s_data {
 	char	*str;
 }				t_data;
 
-int get_next_line(const int fd, char **line);
+int				get_next_line(const int fd, char **line);
 
 #endif
