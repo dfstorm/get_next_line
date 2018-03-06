@@ -6,7 +6,7 @@
 /*   By: ggenois <ggenois@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/26 10:50:01 by ggenois      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/01 19:07:54 by ggenois     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/06 16:27:23 by ggenois     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,7 +40,5 @@ int		main(int argc, char **argv)
 		ft_putstr("\n Lines: ");
 		ft_putnbr(x);
 	}
-	sleep(150);
-	
 	return (0);
 }
