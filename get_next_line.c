@@ -45,6 +45,25 @@ char	*ft_get_buffer_chunck(int fd, int *status)
 	return (str);
 }
 
+void	append_chunk(int fd, char **str, int *status)
+{
+	char	*s1;
+	char	*tmp;
+
+	s1 = ft_get_buffer_chunck(fd, status);
+	tmp = (*str);
+	(*str) = ft_strjoin((*str), s1);
+	free(tmp);
+	free(s1);
+}
+
+void	ft_ds(char *s)
+{
+	ft_putstr("debug: [");
+	ft_putstr(s);
+	ft_putstr("]\n");
+}
+
 int		get_next_line(const int fd, char **line)
 {
 	static char		*g_b = NULL;
@@ -55,11 +74,13 @@ int		get_next_line(const int fd, char **line)
 	e = 1;
 	if (g_b == NULL)
 		g_b = ft_strnew(0);
-	while ((i = ))
-	tmp = ft_get_buffer_chunck(fd, &e);
+	while ((i = ft_finditem(g_b, '\n')) < 0 && e == 1)
+		append_chunk(fd, &g_b, &e);
+	(*line) = (i > 0 ? ft_strsub(g_b, 0, i) : NULL);
+	tmp = g_b;
+	g_b = ft_strsub(g_b, i + 1, ((ft_strlen(g_b) - i)));
 	free(tmp);
-	if((*line)) {}
-	free(g_b);
-	return (0);
-
+	if(e != 1)
+		free(g_b);
+	return (e);
 }
