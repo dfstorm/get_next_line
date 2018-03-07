@@ -57,13 +57,6 @@ void	append_chunk(int fd, char **str, int *status)
 	free(s1);
 }
 
-void	ft_ds(char *s)
-{
-	ft_putstr("debug: [");
-	ft_putstr(s);
-	ft_putstr("]\n");
-}
-
 int		get_next_line(const int fd, char **line)
 {
 	static char		*g_b = NULL;
