@@ -5,9 +5,15 @@ make -C libft/ fclean && make -C libft/ && clang -Wall -Wextra -Werror -I libft/
 
 valgrind --leak-check=full --track-origins=yes --show-leaks-kinds=all
 
+make -C libft/ fclean && make -C libft/ &&
+clang -Wall -Wextra -Werror -I libft/includes -o get_next_line.o -c get_next_line.c &&
+clang -Wall -Wextra -Werror -I libft/includes -o main.o -c main.c && clang -o test_gnl main.o get_next_line.o -I libft/includes -L libft/ -lft
 
 
 
+        RET0=`${CMD_GCC} -Wall -Werror -Wextra -I ./tmp "get_next_line.c" ./gnl11.c -o ./gnl11`
+
+clang -Wall -Wextra -Werror -I libft/includes -o get_next_line.o -c get_next_line.c && clang -Wall -Wextra -Werror -I libft/includes -o main.o -c gnl11.c && clang -o test_gnl main.o get_next_line.o -I libft/includes -L libft/ -lft
 
 
 /*

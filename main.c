@@ -6,7 +6,7 @@
 /*   By: ggenois <ggenois@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/26 10:50:01 by ggenois      #+#   ##    ##    #+#       */
-/*   Updated: 2018/03/06 16:27:23 by ggenois     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/08 17:36:07 by ggenois     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,26 +19,24 @@
 
 int		main(int argc, char **argv)
 {
-	char	*str;
-	int		fd;
-	int		i;
+	char	*s1;
 	int		x;
+	int		fd1;
 
-	str = NULL;
-	x = 0;
 	if (argc > 1)
 	{
-		fd = open(argv[1], O_RDONLY);
-		while ((i = get_next_line(fd, &str)) > 0)
+		fd1 = open(argv[1], O_RDONLY);
+		while (1)
 		{
-			ft_putstr("From main: ");
-			ft_putstr(str);
+			x = get_next_line(fd1, &s1);
+			if (x < 1)
+			{
+				break ;
+			}
+			ft_putstr(s1);
 			ft_putstr("\n");
-			free(str);
-			x++;
+			free(s1);
 		}
-		ft_putstr("\n Lines: ");
-		ft_putnbr(x);
 	}
 	return (0);
 }

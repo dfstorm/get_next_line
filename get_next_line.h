@@ -6,7 +6,7 @@
 /*   By: ggenois <ggenois@student.le-101.fr>        +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/26 13:44:14 by ggenois      #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/28 19:07:21 by ggenois     ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/03/08 15:18:38 by ggenois     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,11 +15,6 @@
 # define _GET_NEXT_LINE_H
 
 # define BUFF_SIZE 32
-
-typedef	struct	s_data {
-	int		ipos;
-	char	*str;
-}				t_data;
 
 int				get_next_line(const int fd, char **line);
 
